@@ -5,25 +5,30 @@
 #include <opencv2/highgui.hpp>
 
 #include "sstream"
+#include "useandfindobj.h"
+#include "useandfindobj.cpp"
+
 using namespace std;
 using namespace  cv;
 
 
-
-Mat getpic(/*string name*/){
-    VideoCapture cap(1); // open the default camera
+//Mat pic;
+//Mat getpic(/*string name*/){
+/*    VideoCapture cap(1); // open the default camera
     if(!cap.isOpened()){  // check if we succeeded
         //return -1;
 }
     cap.set(CAP_PROP_EXPOSURE, 0.00000001);
-    cap.set(CV_CAP_PROP_GAIN, 0.000000001);
-    cap.set(CV_CAP_PROP_FRAME_WIDTH,1448);
-    cap.set(CV_CAP_PROP_FRAME_HEIGHT,1080);
+    cap.set(CAP_PROP_GAIN, 0.000000001);
+    cap.set(CAP_PROP_FRAME_WIDTH,1448);
+    cap.set(CAP_PROP_FRAME_HEIGHT,1080);
 
     Mat image;
+
     for (int i = 0 ; i < 2 ; ++i){
 
         cap >> image;} // get a new frame from camera
+
     return image;
 
 }
@@ -39,24 +44,24 @@ Mat getpic(string name){
 
 void converttogrey(Mat &pic){
     Mat newcopy = pic.clone();
-    cvtColor(newcopy,pic,CV_BGR2GRAY);
+    cvtColor(newcopy,pic,COLOR_BGR2GRAY);
     //return newcopy;
 }
 
 void resi(Mat &image){
     resize(image, image, Size(144*8,108*8));
 }
-void dilateErode(Mat &pic){
+void dilateErode(Mat &image){
     Mat structuring_element = getStructuringElement( 1, Size(13,13),Point(4,4) );
-    dilate(pic, pic, structuring_element);
-    erode(pic,pic, structuring_element);
-    erode(pic,pic, structuring_element);
-    dilate(pic, pic, structuring_element);
+    dilate(image, image, structuring_element);
+    erode(image,image, structuring_element);
+    erode(image,image, structuring_element);
+    dilate(image, image, structuring_element);
 }
 
-void converttobinary(Mat &pic){
-    Mat newcopy = pic.clone();
-    threshold( newcopy, pic, 0, 255, THRESH_BINARY | THRESH_OTSU );
+void converttobinary(Mat &image){
+    Mat newcopy = image.clone();
+    threshold( newcopy, image, 0, 255, THRESH_BINARY | THRESH_OTSU );
 }
 
 String conBinToString(Mat image){
@@ -96,53 +101,95 @@ Mat conStringToBin(string s){
     return image;
 }
 
+void saveImage(Mat image){
+    imwrite("C:/Users/gusta/Desktop/images/test_image04.jpg",image);
+}
+
 void PanoramicDistortion(Mat &image){
     Point2f inputpoint[4];
     Mat lambda(2,4,CV_32FC1);
-    Mat output;
+    Point2f output[4];
     lambda = Mat::zeros(image.rows, image.cols, image.type());
-    inputpoint[0] = Point2f();
-    inputpoint[1] = Point2f();
-    inputpoint[2] = Point2f();
-    inputpoint[3] = Point2f();
-}
+    inputpoint[0] = Point2f(132,0);
+    inputpoint[1] = Point2f(121,828);
+    inputpoint[2] = Point2f(756,0);
+    inputpoint[3] = Point2f(763,850);
+    //inputpoint[4] = Point2f(108,369);
 
-/*static void onMouse(int event,int x,int y,int,void*)
+    output[0]= Point2f(100,0);
+    output[1]= Point2f(100,828);
+    output[2]= Point2f(624,0);
+    output[3]= Point2f(624,828);
+    //output[4]= Point2f(100,369);
+
+    lambda = getPerspectiveTransform(inputpoint,output);
+    warpPerspective(image,image,lambda,image.size());
+}*/
+
+Mat p;
+static void onMouse(int event,int x,int y,int,void*)
 {
     //this function will be called every time you move your mouse over the image
     // the coordinates will be in x and y variables
-    Mat img2;pic.copyTo(img2);
+    Mat img2;p.copyTo(img2);
     line(img2,Point(x,0),Point(x,img2.cols),Scalar(0,0,255),2);
     line(img2,Point(0,y),Point(img2.rows,y),Scalar(0,0,255),2);
-    imshow("Image",img2);
-}*/
+
+    imshow("edges",p);
+    cout<< "                                   "<<"\r";
+    cout<< x<<","<<y<<"\r";
+
+
+}
 
 
 int main()
 {
-    Mat pic, pics;
-    string s;
-    pic = getpic(/*"C:/Users/gusta/OneDrive - Syddansk Universitet/3,semester/cv/images/ORings/ORing01.jpg"*/);
-    PanoramicDistortion(pic);
-    //converttogrey(pic);
-    //converttobinary(pic);
-    //dilateErode(pic);
-    resi(pic);
+
+
+    useAndFindObj c("C:/Users/gusta/Desktop/images/rispude01.jpg");
+    //Mat pic;
+
+    //p = c.getimage();
+    c.undistortimage();
     namedWindow("edges",WINDOW_AUTOSIZE);
-    imshow("edges", pic);
-   // setMouseCallback("edges",onMouse);
-    waitKey(0);
-    //while (true){
-    //if(waitKey(30) >= 0) break;
+    //setMouseCallback("edges",onMouse);
+    c.saveImage("C:/Users/gusta/Desktop/images/calb-rispude01.jpg");
+    imshow("edges",c.getimage());
+     waitKey(0);
+    /*c.resi(144*8,108*8);
+    c.PanoramicDistortion();
 
+    p = c.getimage();
+    namedWindow("edges",WINDOW_AUTOSIZE);
+    //imshow("edges", p);
+    setMouseCallback("edges",onMouse);
+    waitKey(0);*/
+    
+    //Mat pp = c.getimage();
+    //namedWindow("edges",WINDOW_AUTOSIZE);
+    //imshow("edges",pp);
+    //waitKey(0);
+    /* //Mat pic, pics;
+    //string s;
+    pic = getpic("C:/Users/gusta/Desktop/images/test_image.jpg");
+    //saveImage(pic);
     resi(pic);
 
+    PanoramicDistortion(pic);
+    converttogrey(pic);
+    converttobinary(pic);
+    dilateErode(pic);
 
+    namedWindow("edges",WINDOW_AUTOSIZE);
+    //imshow("edges", pic);
+    setMouseCallback("edges",onMouse);
+    waitKey(0);
 
-    s = conBinToString(pic);
+    //s = conBinToString(pic);
     //cout << s <<endl;
 
-    cout <<s<<endl;
+    //cout <<s<<endl;
 
 
    // pics = conStringToBin(s);
@@ -150,6 +197,6 @@ int main()
     //imshow("test1", pics);
     //waitKey(0);
 
-
+*/
     return 0;
 }
