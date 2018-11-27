@@ -91,7 +91,7 @@ std::string useAndFindObj::conBinToString(){
 }
 void useAndFindObj::saveImage(string file_place){
     imwrite(file_place,pic);
-
+    cout<< "picture saved to: "<<file_place<<endl;
 }
 void useAndFindObj::PanoramicDistortion(){
     Point2f inputpoint[4];
@@ -116,7 +116,6 @@ void useAndFindObj::PanoramicDistortion(){
 
 void useAndFindObj::undistortimage(){
     Matx33f K(1831.6919,0,724,0,1831.6919,540,0,0,1);// intrinsic camera matrix
-    //array<float> K = {};
     Vec<float, 5> k(-0.541726, 0.420384, 0, 0, 0); // distortion coefficients
     Mat mapX, mapY;
     Size frameSize(1448, 1080);
