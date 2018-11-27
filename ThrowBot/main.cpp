@@ -1,5 +1,4 @@
 #include "throwbot.h"
-//#include "findobject.h"
 #include "imageprocessing.h"
 #include <QApplication>
 #include <iostream>
@@ -28,10 +27,10 @@ int main(int argc, char* argv[])
 //    QApplication a(argc, argv);
 
     //Reads the image at the given location and saves it in the member variable
-    ImageProcessing image("C:/Users/sarah/OneDrive - Syddansk Universitet/UNI/Tredje Semester/Semesterprojekt (tredje semester)/Images/rispude05.jpg");
+    //ImageProcessing image("C:/Users/sarah/OneDrive - Syddansk Universitet/UNI/Tredje Semester/Semesterprojekt (tredje semester)/Images/rispude05.jpg");
 
-    //Takes the input from the given source (0 = default/webcam, ?1 = robotcam?)
-    //ImageProcessing image(1);
+    //Takes the input from the given source (0 = default/webcam, 1 = robotcam)
+    ImageProcessing image(1);
 
     //cv::namedWindow("Image", cv::WINDOW_AUTOSIZE);
 

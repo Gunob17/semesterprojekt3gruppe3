@@ -22,6 +22,8 @@ ImageProcessing::ImageProcessing(int inputSource) {
     for (int i = 0 ; i < 2 ; ++i){
         cap >> m_image;
     } // get a new frame from camera
+
+    cv::cvtColor(m_image, m_image, CV_BGR2GRAY);        //Convert the image to grayscale (necessary for template matching)
 }
 
 ImageProcessing::ImageProcessing(std::string loc) {
@@ -67,8 +69,6 @@ int ImageProcessing::findTemplate() {
 
     cv::imshow("Template", template_img);
     cv::waitKey(10);
-
-    cv::cvtColor(m_image, m_image, CV_BGR2GRAY);
 
     while(true) {
 //Matches the template to the image using the given match method, and stores the result in result_mat
