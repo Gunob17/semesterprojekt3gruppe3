@@ -20,6 +20,7 @@ public:
     int findCenter();
     void undistort();
     void saveImage(std::string);
+    void PanoramicDistortion();
 
 private:
     cv::Mat m_image;

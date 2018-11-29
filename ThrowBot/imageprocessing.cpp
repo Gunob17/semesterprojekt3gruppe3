@@ -112,6 +112,8 @@ int ImageProcessing::findCenter() {
 
     std::cout << "Center point: " << m_center << std::endl;
 
+    std::cout << "Center point recalculated: " << m_center.x-300 << ", " << m_center.y-900 << std::endl;
+
 //Draws the center point on the image
     cv::line(m_image, m_center, m_center, cv::Scalar(0,0,255), 4, 8);
 
@@ -121,4 +123,23 @@ int ImageProcessing::findCenter() {
     cv::waitKey(0);
 
     return 0;
+}
+
+void ImageProcessing::PanoramicDistortion(){
+    cv::Point2f inputpoint[4];
+    cv::Mat lambda(2,4,CV_32FC1);
+    cv::Point2f output[4];
+    lambda = cv::Mat::zeros(m_image.rows, m_image.cols, m_image.type());
+    inputpoint[0] = cv::Point2f(96,882);
+    inputpoint[1] = cv::Point2f(945,890);
+    inputpoint[2] = cv::Point2f(945,155);
+    inputpoint[3] = cv::Point2f(115,163);
+
+    output[0]= cv::Point2f((294+300),(-842+900));
+    output[1]= cv::Point2f((836+300),(-310+900));
+    output[2]= cv::Point2f((375+300),(165+900));
+    output[3]= cv::Point2f((-159+300),(-375+900));
+
+    lambda = cv::getPerspectiveTransform(inputpoint,output);
+    cv::warpPerspective(m_image,m_image,lambda,m_image.size());
 }
