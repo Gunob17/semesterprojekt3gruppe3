@@ -151,11 +151,15 @@ int main()
     //Mat pic;
 
     //p = c.getimage();
-    c.undistortimage();
+    //c.undistortimage();
     namedWindow("edges",WINDOW_AUTOSIZE);
-    //setMouseCallback("edges",onMouse);
-    c.saveImage("C:/Users/gusta/Desktop/images/calb-rispude01.jpg");
-    imshow("edges",c.getimage());
+    c.PanoramicDistortion();
+    c.findTemplate();
+    c.findCenter();
+    p = c.getimage();
+    setMouseCallback("edges",onMouse);
+    //c.saveImage("C:/Users/gusta/Desktop/images/robcalc03.jpg");
+    //imshow("edges",c.getimage());
      waitKey(0);
     /*c.resi(144*8,108*8);
     c.PanoramicDistortion();

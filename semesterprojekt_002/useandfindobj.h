@@ -23,9 +23,14 @@ public:
     void saveImage(std::string file_place);
     void PanoramicDistortion();
     void undistortimage();
+    int findTemplate();
+    int findCenter();
 
 private:
     cv::Mat pic;
+    cv::Point m_tlCorner;
+    cv::Point m_brCorner;
+    cv::Point m_center;
 };
 
 #endif // USEANDFINDOBJ_H
