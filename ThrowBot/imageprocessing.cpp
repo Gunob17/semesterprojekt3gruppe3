@@ -19,8 +19,13 @@ ImageProcessing::ImageProcessing(int inputSource) {
     cap.set(cv::CAP_PROP_FRAME_WIDTH,1448);
     cap.set(cv::CAP_PROP_FRAME_HEIGHT,1080);
 
-    for (int i = 0 ; i < 2 ; ++i){
+    namedWindow("Camera", cv::WINDOW_AUTOSIZE);
+
+    for (;;){
         cap >> m_image;
+        imshow("Camera", m_image);
+        if(cv::waitKey(30)>=0)
+            break;
     } // get a new frame from camera
 
     cv::cvtColor(m_image, m_image, CV_BGR2GRAY);        //Convert the image to grayscale (necessary for template matching)
