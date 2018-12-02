@@ -30,15 +30,13 @@ int main(int argc, char* argv[])
 //    ImageProcessing image("C:/Users/sarah/OneDrive - Syddansk Universitet/UNI/Tredje Semester/Semesterprojekt (tredje semester)/Images/rispude05.jpg");
 
     //Takes the input from the given source (0 = default/webcam, 1 = robotcam)
-    ImageProcessing image(1);
-
-//    cv::namedWindow("Image", cv::WINDOW_AUTOSIZE);
-
+    ImageProcessing image(0);
 
     image.undistort();
-    cv::namedWindow("test");
-    cv::imshow("test", image.getimage());
+    cv::namedWindow("Captured Image");
+    cv::imshow("Captured Image", image.getimage());
     cv::waitKey(0);
+
     image.PanoramicDistortion();
     image.findTemplate();
     image.findCenter();
