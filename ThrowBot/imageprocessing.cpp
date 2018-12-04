@@ -66,7 +66,7 @@ int ImageProcessing::findTemplate() {
     //match method options: CV_TM_SQDIFF, CV_TM_SQDIFF_NORMED, CV_TM _CCORR, CV_TM_CCORR_NORMED, CV_TM_CCOEFF, CV_TM_CCOEFF_NORMED
     int match_method = CV_TM_CCORR_NORMED;
 
-    template_img = cv::imread("C:/Users/sarah/OneDrive - Syddansk Universitet/UNI/Tredje Semester/Semesterprojekt (tredje semester)/Images/rispude01 - template.jpg", cv::IMREAD_GRAYSCALE);
+    template_img = cv::imread("../rispude01 - template.jpg", cv::IMREAD_GRAYSCALE);
     if (!template_img.data) {
         std::cout << "Could not open template";
         return -1;
