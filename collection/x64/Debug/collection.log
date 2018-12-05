@@ -1,0 +1,12 @@
+﻿  imageprocessing.cpp
+c:\users\gusta\onedrive - syddansk universitet\3,semester\cv\collection\imageprocessing.cpp(43): warning C4305: 'argument': truncation from 'double' to '_Tp'
+          with
+          [
+              _Tp=float
+          ]
+c:\users\gusta\onedrive - syddansk universitet\3,semester\cv\collection\imageprocessing.cpp(45): warning C4305: 'argument': truncation from 'double' to '_Tp'
+          with
+          [
+              _Tp=cv::DataType<cv::RotatedRect>::channel_type
+          ]
+  collection.vcxproj -> C:\Users\gusta\OneDrive - Syddansk Universitet\3,semester\cv\collection\debug\collection.exe

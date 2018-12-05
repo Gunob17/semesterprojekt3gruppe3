@@ -602,11 +602,11 @@ int main(int argc, char **argv) {
     Mat img = imread(f, 0);
     //cv::imshow("chessboard detection", img);
     findChessboardCorners(img,patternSize,q[i], CALIB_CB_NORMALIZE_IMAGE);
-    cout<<q[i]<<endl;
+    //cout<<q[i]<<endl;
     // 2. Use cv::cornerSubPix() to refine the found corner detections
     cornerSubPix(img,q[i],Size(5,5),Size(-1,-1),TermCriteria(CV_TERMCRIT_EPS + CV_TERMCRIT_ITER, 30, 0.1));
     // Display
- cout<<q[i]<<endl;
+ //cout<<q[i]<<endl;
     cv::drawChessboardCorners(img, patternSize, q[i], success);
     cv::imshow("chessboard detection", img);
     cout<<success<<endl;

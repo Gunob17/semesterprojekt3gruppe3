@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "collection", "collection.vcxproj", "{8C252B2E-76E7-33CA-9862-2FA67228504C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ThrowBot", "..\..\..\..\Documents\GitHub\semesterprojekt3gruppe3\ThrowBot - Copy\ThrowBot.vcxproj", "{B3C4C9F1-1A07-3A7D-8429-53A1C756F62E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C252B2E-76E7-33CA-9862-2FA67228504C}.Debug|x64.ActiveCfg = Debug|x64
+		{8C252B2E-76E7-33CA-9862-2FA67228504C}.Debug|x64.Build.0 = Debug|x64
+		{8C252B2E-76E7-33CA-9862-2FA67228504C}.Release|x64.ActiveCfg = Release|x64
+		{8C252B2E-76E7-33CA-9862-2FA67228504C}.Release|x64.Build.0 = Release|x64
+		{B3C4C9F1-1A07-3A7D-8429-53A1C756F62E}.Debug|x64.ActiveCfg = Debug|x64
+		{B3C4C9F1-1A07-3A7D-8429-53A1C756F62E}.Debug|x64.Build.0 = Debug|x64
+		{B3C4C9F1-1A07-3A7D-8429-53A1C756F62E}.Release|x64.ActiveCfg = Release|x64
+		{B3C4C9F1-1A07-3A7D-8429-53A1C756F62E}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85B96087-4EED-452E-9B5C-BA0E503E7AE6}
+	EndGlobalSection
+EndGlobal
