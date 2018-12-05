@@ -13,6 +13,7 @@
 
 Login conn;
 ImageProcessing img;
+cv::Point point;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -60,6 +61,18 @@ void MainWindow::on_startButton_clicked() {
 }
 
 void MainWindow::on_throwButton_clicked() {
-    img.makePlacement((ui->xInput->text()).toInt(), (ui->yInput->text()).toInt());
+    point = cv::Point(ui->xInput->value(), ui->yInput->value());
+    img.makePlacement(point.x, point.y);
     QMessageBox::information(this, "Message", "The object will now be thrown to the chosen destination");
+    cv::destroyAllWindows();
+}
+
+void MainWindow::on_verifyButton_clicked() {
+//    ImageProcessing finalImage;
+    img = ImageProcessing(0);
+    img.undistort();
+    img.PanoramicDistortion();
+    img.verifyThrow(point.x, point.y);
+    QMessageBox::information(this, "Message", "The throw has been completed with these results");
+    cv::destroyAllWindows();
 }

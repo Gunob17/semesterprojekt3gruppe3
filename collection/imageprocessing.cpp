@@ -12,7 +12,7 @@ ImageProcessing::ImageProcessing() {
 ImageProcessing::ImageProcessing(int inputSource) {
 	cv::VideoCapture cap(inputSource);
 	if (!cap.isOpened()) {
-		std::cout << "Cap is not open";
+        std::cout << "Cap is not open" << std::endl;
 	}
 	cap.set(cv::CAP_PROP_EXPOSURE, 0.00000001);
 	cap.set(cv::CAP_PROP_GAIN, 0.000000001);
@@ -52,7 +52,6 @@ void ImageProcessing::undistort() {
 }
 
 void ImageProcessing::saveImage(std::string savePath) {
-	//Which image should be saved - image or undistImg?
 	imwrite(savePath, m_image);
 }
 
@@ -69,7 +68,7 @@ int ImageProcessing::findTemplate() {
 
 	template_img = cv::imread("./rispude01 - template.jpg", cv::IMREAD_GRAYSCALE);
 	if (!template_img.data) {
-		std::cout << "Could not open template";
+        std::cout << "Could not open template" << std::endl;
 		return -1;
 	}
 
@@ -156,17 +155,30 @@ cv::Point2i ImageProcessing::getCenter()
 }
 
 int ImageProcessing::makePlacement(int x, int y) {
-    //Find center of rectangle - and therefore object
-    //Center point pixel coordinates are determined by calculating from top left and bottom right corner
-    m_center = cv::Point(x+300,y+900);
+    //Converts the input coordinates from the GUI to pixel coordinates
+    cv::Point point = cv::Point(x + 300, y + 900);
 
-    //std::cout << "Center point: " << m_center << std::endl;
+//    std::cout << "Placement Point: " << point << std::endl;
 
-    //std::cout << "Center point recalculated: " << m_center.x - 300 << ", " << m_center.y - 900 << std::endl;
+    //Draws the point on the image
+    cv::line(m_image, point, point, cv::Scalar(0, 0, 255), 4, 8);
+    cv::imshow("Result", m_image);
 
-    //Draws the center point on the image
-    cv::line(m_image, m_center, m_center, cv::Scalar(0, 0, 255), 4, 8);
-    //cv::line(m_imageClone, cv::Point(x, y), cv::Point(x, y), cv::Scalar(0, 0, 255), 4, 8);
+    //Wait for random key press
+    cv::waitKey(0);
+
+    return 0;
+}
+
+int ImageProcessing::verifyThrow(int x, int y) {
+    //Converts the input coordinates from the GUI to pixel coordinates
+    cv::Point point = cv::Point(x + 300, y + 900);
+
+//    std::cout << "Verify Point: " << point << std::endl;
+
+    //Draws the destination point from the GUI on the image
+
+    cv::line(m_image, point, point, cv::Scalar(0, 0, 255), 4, 8);
     cv::imshow("Result", m_image);
 
     //Wait for random key press

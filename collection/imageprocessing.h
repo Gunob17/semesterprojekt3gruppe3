@@ -23,10 +23,11 @@ public:
 	void PanoramicDistortion();
 	cv::Point2i getCenter();
     int makePlacement(int, int);
+    int verifyThrow(int, int);
 
 private:
 	cv::Mat m_image;
-	cv::Mat m_imageClone;
+    cv::Mat m_imageClone;
 	cv::Point m_tlCorner;
 	cv::Point m_brCorner;
 	cv::Point m_center;

@@ -48,7 +48,7 @@
     <property name="geometry">
      <rect>
       <x>460</x>
-      <y>230</y>
+      <y>140</y>
       <width>441</width>
       <height>41</height>
      </rect>
@@ -57,11 +57,11 @@
      <string>Start New Test</string>
     </property>
    </widget>
-   <widget class="QLabel" name="inputPrompt">
+   <widget class="QLabel" name="label3">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>420</y>
+      <x>456</x>
+      <y>220</y>
       <width>441</width>
       <height>31</height>
      </rect>
@@ -81,8 +81,8 @@
    <widget class="QLabel" name="xLabel">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>460</y>
+      <x>456</x>
+      <y>260</y>
       <width>55</width>
       <height>16</height>
      </rect>
@@ -97,8 +97,8 @@
    <widget class="QLabel" name="yLabel">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>460</y>
+      <x>676</x>
+      <y>260</y>
       <width>21</width>
       <height>16</height>
      </rect>
@@ -114,7 +114,7 @@
     <property name="geometry">
      <rect>
       <x>460</x>
-      <y>500</y>
+      <y>440</y>
       <width>441</width>
       <height>41</height>
      </rect>
@@ -126,8 +126,8 @@
    <widget class="QSpinBox" name="xInput">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>460</y>
+      <x>516</x>
+      <y>260</y>
       <width>151</width>
       <height>22</height>
      </rect>
@@ -136,14 +136,14 @@
    <widget class="QSpinBox" name="yInput">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>460</y>
+      <x>706</x>
+      <y>260</y>
       <width>151</width>
       <height>22</height>
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="welcome">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
       <x>460</x>
@@ -175,11 +175,11 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="label1">
     <property name="geometry">
      <rect>
       <x>460</x>
-      <y>180</y>
+      <y>90</y>
       <width>441</width>
       <height>21</height>
      </rect>
@@ -199,11 +199,11 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="label2">
     <property name="geometry">
      <rect>
       <x>460</x>
-      <y>200</y>
+      <y>110</y>
       <width>441</width>
       <height>20</height>
      </rect>
@@ -215,6 +215,83 @@
     </property>
     <property name="text">
      <string>The image will then be processed and the location of the object determined.</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label7">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>530</y>
+      <width>441</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Click the button below to verify by taking a picture after the throw.</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label6">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>410</y>
+      <width>441</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Click the button below to throw the object to the chosen coordinates.</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="verifyButton">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>560</y>
+      <width>441</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Verify Throw</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label4">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>310</y>
+      <width>441</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>For this value of 'x', the boundary values for 'y' are: </string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label5">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>350</y>
+      <width>441</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>For this value of 'y', the boundary values for 'x' are: </string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>

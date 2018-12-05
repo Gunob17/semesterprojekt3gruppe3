@@ -20,6 +20,8 @@ private slots:
     void on_startButton_clicked();
     void on_throwButton_clicked();
 
+    void on_verifyButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
