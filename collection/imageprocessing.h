@@ -22,6 +22,7 @@ public:
 	void saveImage(std::string);
 	void PanoramicDistortion();
 	cv::Point2i getCenter();
+    int makePlacement(int, int);
 
 private:
 	cv::Mat m_image;

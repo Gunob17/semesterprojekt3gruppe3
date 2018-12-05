@@ -154,3 +154,23 @@ cv::Point2i ImageProcessing::getCenter()
 {
 	return m_center;
 }
+
+int ImageProcessing::makePlacement(int x, int y) {
+    //Find center of rectangle - and therefore object
+    //Center point pixel coordinates are determined by calculating from top left and bottom right corner
+    m_center = cv::Point(x+300,y+900);
+
+    //std::cout << "Center point: " << m_center << std::endl;
+
+    //std::cout << "Center point recalculated: " << m_center.x - 300 << ", " << m_center.y - 900 << std::endl;
+
+    //Draws the center point on the image
+    cv::line(m_image, m_center, m_center, cv::Scalar(0, 0, 255), 4, 8);
+    //cv::line(m_imageClone, cv::Point(x, y), cv::Point(x, y), cv::Scalar(0, 0, 255), 4, 8);
+    cv::imshow("Result", m_image);
+
+    //Wait for random key press
+    cv::waitKey(0);
+
+    return 0;
+}
