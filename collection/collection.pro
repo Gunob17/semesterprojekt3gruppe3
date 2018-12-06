@@ -26,13 +26,13 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    imageprocessing.cpp \
-    login.cpp
+        imageprocessing.cpp \
+        login.cpp
 
 HEADERS += \
         mainwindow.h \
-    imageprocessing.h \
-    login.h
+        imageprocessing.h \
+        login.h
 
 FORMS += \
         mainwindow.ui

@@ -817,7 +817,10 @@ debug\mainwindow.obj: ..\collection\mainwindow.cpp ../collection/mainwindow.h \
 		C:\opencv\build\include\opencv2\videostab\deblurring.hpp \
 		C:\opencv\build\include\opencv2\videostab\wobble_suppression.hpp \
 		C:\opencv\build\include\opencv2\videostab\ring_buffer.hpp \
-		C:\Qt\5.10.0\msvc2017_64\include\QtCore\QString
+		C:\Qt\5.10.0\msvc2017_64\include\QtCore\QString \
+		C:\Qt\5.10.0\msvc2017_64\include\QtWidgets\QMessageBox \
+		C:\Qt\5.10.0\msvc2017_64\include\QtWidgets\qmessagebox.h \
+		C:\Qt\5.10.0\msvc2017_64\include\QtWidgets\qdialog.h
 
 debug\imageprocessing.obj: ..\collection\imageprocessing.cpp ../collection/imageprocessing.h \
 		C:\opencv\build\include\opencv2\opencv.hpp \

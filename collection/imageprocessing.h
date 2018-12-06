@@ -18,10 +18,10 @@ public:
 	cv::Mat getimage();
 	int findTemplate();
 	int findCenter();
-	int makePlacement(int x, int y);
+    int setDestination(int x, int y);
 	void undistort();
 	void saveImage(std::string);
-	void PanoramicDistortion();
+    void panoramicDistortion();
 	cv::Point2i getCenter();
 	int verifyThrow(int x, int y);
 	void resi(int cols, int rows);
@@ -33,15 +33,5 @@ private:
 	cv::Point m_brCorner;
 	cv::Point m_center;
 };
-
-/*
-void converttogrey();
-void resi(int cols, int rows);
-void dilateErode();
-
-void converttobinary();
-std::string conBinToString();
-void PanoramicDistortion();
-*/
 
 #endif // IMAGEPROCESSING_H

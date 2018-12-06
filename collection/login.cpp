@@ -8,21 +8,17 @@
 
 Login::Login(){}
 
-void Login::makeConection(){
+void Login::makeConnection(){
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
 
-    db.setHostName("localhost");
+    db.setHostName("192.168.137.1");
     db.setPort(3306);
     db.setDatabaseName("test123");
     db.setUserName("root");
     db.setPassword("pass");
 
-    if(db.open()){
-        //qDebug() << "Opended!";
-        //db.close();
-    }
-    else if (! db.isValid()){
+    if (!db.isValid()){
         qDebug() << "Error = " << db.lastError().text();
     }
 }

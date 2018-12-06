@@ -7,13 +7,11 @@
 #include <QtSql/QSqlQuery>
 #include <QtDebug>
 
-class Login{
+class Login {
 
 public:
     Login();
-
-    void makeConection();
-
+    void makeConnection();
     QSqlDatabase db;
 };
 
