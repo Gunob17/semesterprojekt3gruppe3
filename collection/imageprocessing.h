@@ -18,16 +18,17 @@ public:
 	cv::Mat getimage();
 	int findTemplate();
 	int findCenter();
+	int makePlacement(int x, int y);
 	void undistort();
 	void saveImage(std::string);
 	void PanoramicDistortion();
 	cv::Point2i getCenter();
-    int makePlacement(int, int);
-    int verifyThrow(int, int);
+	int verifyThrow(int x, int y);
+	void resi(int cols, int rows);
 
 private:
 	cv::Mat m_image;
-    cv::Mat m_imageClone;
+	cv::Mat m_imageClone;
 	cv::Point m_tlCorner;
 	cv::Point m_brCorner;
 	cv::Point m_center;

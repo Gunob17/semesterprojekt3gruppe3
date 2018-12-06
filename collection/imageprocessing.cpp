@@ -12,7 +12,7 @@ ImageProcessing::ImageProcessing() {
 ImageProcessing::ImageProcessing(int inputSource) {
 	cv::VideoCapture cap(inputSource);
 	if (!cap.isOpened()) {
-        std::cout << "Cap is not open" << std::endl;
+		std::cout << "Cap is not open";
 	}
 	cap.set(cv::CAP_PROP_EXPOSURE, 0.00000001);
 	cap.set(cv::CAP_PROP_GAIN, 0.000000001);
@@ -39,6 +39,7 @@ ImageProcessing::ImageProcessing(std::string loc) {
 	}
 }
 
+
 void ImageProcessing::undistort() {
 	cv::Matx33f K(1831.6919, 0, 724, 0, 1831.6919, 540, 0, 0, 1);// intrinsic camera matrix
 	//array<float> K = {};
@@ -48,11 +49,13 @@ void ImageProcessing::undistort() {
 	cv::initUndistortRectifyMap(K, k, cv::Matx33f::eye(), K, frameSize, CV_32FC1, mapX, mapY);
 	m_imageClone = m_image.clone();
 	cv::remap(m_image, m_image, mapX, mapY, 1, cv::BORDER_CONSTANT);
+	m_imageClone = m_image.clone();
 	cv::cvtColor(m_image, m_image, CV_BGR2GRAY);        //Convert the image to grayscale (necessary for template matching)
 }
 
 void ImageProcessing::saveImage(std::string savePath) {
-	imwrite(savePath, m_image);
+	//Which image should be saved - image or undistImg?
+	imwrite(savePath, m_imageClone);
 }
 
 cv::Mat ImageProcessing::getimage() {
@@ -66,9 +69,9 @@ int ImageProcessing::findTemplate() {
 	//match method options: CV_TM_SQDIFF, CV_TM_SQDIFF_NORMED, CV_TM _CCORR, CV_TM_CCORR_NORMED, CV_TM_CCOEFF, CV_TM_CCOEFF_NORMED
 	int match_method = CV_TM_CCORR_NORMED;
 
-	template_img = cv::imread("./rispude01 - template.jpg", cv::IMREAD_GRAYSCALE);
+	template_img = cv::imread("./images/rispude01 - template.jpg", cv::IMREAD_GRAYSCALE);
 	if (!template_img.data) {
-        std::cout << "Could not open template" << std::endl;
+		std::cout << "Could not open template";
 		return -1;
 	}
 
@@ -94,7 +97,7 @@ int ImageProcessing::findTemplate() {
 
 		//A rectangle is drawn around the area where the template has a match
 		cv::rectangle(m_image, matchLoc, point, CV_RGB(255, 0, 0), 3);
-
+		cv::rectangle(m_imageClone, matchLoc, point, CV_RGB(255, 0, 0), 3);
 		//        cv::imshow("Result", image);
 
 		//Wait
@@ -121,7 +124,7 @@ int ImageProcessing::findCenter() {
 
 	//Draws the center point on the image
 	cv::line(m_image, m_center, m_center, cv::Scalar(0, 0, 255), 4, 8);
-
+	cv::line(m_imageClone, m_center, m_center, cv::Scalar(0, 0, 255), 4, 8);
 	//cv::imshow("Result", m_image);
 
 	//Wait for random key press
@@ -129,6 +132,25 @@ int ImageProcessing::findCenter() {
 
 	return 0;
 }
+
+int ImageProcessing::makePlacement(int x, int y) {
+	//Converts the input coordinates from the GUI to pixel coordinates
+	cv::Point point = cv::Point(x + 300, y + 900);
+
+	//    std::cout << "Placement Point: " << point << std::endl;
+
+		//Draws the point on the image
+	cv::line(m_image, point, point, cv::Scalar(0, 0, 255), 4, 8);
+	cv::imshow("Result", m_image);
+
+	//Wait for random key press
+	cv::waitKey(0);
+
+	return 0;
+}
+
+
+
 
 void ImageProcessing::PanoramicDistortion() {
 	cv::Point2f inputpoint[4];
@@ -154,35 +176,26 @@ cv::Point2i ImageProcessing::getCenter()
 	return m_center;
 }
 
-int ImageProcessing::makePlacement(int x, int y) {
-    //Converts the input coordinates from the GUI to pixel coordinates
-    cv::Point point = cv::Point(x + 300, y + 900);
-
-//    std::cout << "Placement Point: " << point << std::endl;
-
-    //Draws the point on the image
-    cv::line(m_image, point, point, cv::Scalar(0, 0, 255), 4, 8);
-    cv::imshow("Result", m_image);
-
-    //Wait for random key press
-    cv::waitKey(0);
-
-    return 0;
+void ImageProcessing::resi(int cols, int rows) {
+	cv::resize(m_image, m_image, cv::Size(cols, rows));
 }
 
 int ImageProcessing::verifyThrow(int x, int y) {
-    //Converts the input coordinates from the GUI to pixel coordinates
-    cv::Point point = cv::Point(x + 300, y + 900);
+	//Converts the input coordinates from the GUI to pixel coordinates
+	cv::Point point = cv::Point(x + 300, y + 900);
 
-//    std::cout << "Verify Point: " << point << std::endl;
+	//    std::cout << "Verify Point: " << point << std::endl;
 
-    //Draws the destination point from the GUI on the image
+		//Draws the destination point from the GUI on the image
 
-    cv::line(m_image, point, point, cv::Scalar(0, 0, 255), 4, 8);
-    cv::imshow("Result", m_image);
+	cv::line(m_image, point, point, cv::Scalar(0, 0, 255), 4, 8);
+	this->findTemplate();
+	this->findCenter();
 
-    //Wait for random key press
-    cv::waitKey(0);
+	cv::imshow("Result", m_image);
 
-    return 0;
+	//Wait for random key press
+	cv::waitKey(0);
+
+	return 0;
 }
