@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>914</width>
+    <width>1430</width>
     <height>708</height>
    </rect>
   </property>
@@ -26,7 +26,7 @@
      <rect>
       <x>11</x>
       <y>11</y>
-      <width>441</width>
+      <width>921</width>
       <height>591</height>
      </rect>
     </property>
@@ -34,7 +34,7 @@
    <widget class="QPushButton" name="loadButton">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>240</x>
       <y>610</y>
       <width>441</width>
       <height>28</height>
@@ -47,7 +47,7 @@
    <widget class="QPushButton" name="startButton">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>960</x>
       <y>140</y>
       <width>441</width>
       <height>41</height>
@@ -60,7 +60,7 @@
    <widget class="QLabel" name="label3">
     <property name="geometry">
      <rect>
-      <x>456</x>
+      <x>956</x>
       <y>220</y>
       <width>441</width>
       <height>31</height>
@@ -81,7 +81,7 @@
    <widget class="QLabel" name="xLabel">
     <property name="geometry">
      <rect>
-      <x>456</x>
+      <x>956</x>
       <y>260</y>
       <width>55</width>
       <height>16</height>
@@ -97,7 +97,7 @@
    <widget class="QLabel" name="yLabel">
     <property name="geometry">
      <rect>
-      <x>676</x>
+      <x>1176</x>
       <y>260</y>
       <width>21</width>
       <height>16</height>
@@ -113,7 +113,7 @@
    <widget class="QPushButton" name="throwButton">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>960</x>
       <y>440</y>
       <width>441</width>
       <height>41</height>
@@ -126,7 +126,7 @@
    <widget class="QSpinBox" name="Xinput">
     <property name="geometry">
      <rect>
-      <x>516</x>
+      <x>1016</x>
       <y>260</y>
       <width>151</width>
       <height>22</height>
@@ -142,7 +142,7 @@
    <widget class="QSpinBox" name="Yinput">
     <property name="geometry">
      <rect>
-      <x>706</x>
+      <x>1206</x>
       <y>260</y>
       <width>151</width>
       <height>22</height>
@@ -152,7 +152,7 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>960</x>
       <y>20</y>
       <width>441</width>
       <height>20</height>
@@ -184,7 +184,7 @@
    <widget class="QLabel" name="label1">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>960</x>
       <y>90</y>
       <width>441</width>
       <height>21</height>
@@ -208,7 +208,7 @@
    <widget class="QLabel" name="label2">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>960</x>
       <y>110</y>
       <width>441</width>
       <height>20</height>
@@ -229,7 +229,7 @@
    <widget class="QLabel" name="label7">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>960</x>
       <y>530</y>
       <width>441</width>
       <height>20</height>
@@ -245,7 +245,7 @@
    <widget class="QLabel" name="label6">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>960</x>
       <y>410</y>
       <width>441</width>
       <height>20</height>
@@ -261,7 +261,7 @@
    <widget class="QPushButton" name="verifyButton">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>960</x>
       <y>560</y>
       <width>441</width>
       <height>41</height>
@@ -274,7 +274,7 @@
    <widget class="QLabel" name="label4">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>960</x>
       <y>310</y>
       <width>441</width>
       <height>20</height>
@@ -290,7 +290,7 @@
    <widget class="QLabel" name="label5">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>960</x>
       <y>350</y>
       <width>441</width>
       <height>20</height>
@@ -303,13 +303,29 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>960</x>
+      <y>610</y>
+      <width>441</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>914</width>
+     <width>1430</width>
      <height>21</height>
     </rect>
    </property>

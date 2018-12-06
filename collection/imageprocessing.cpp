@@ -125,10 +125,10 @@ int ImageProcessing::findCenter() {
 	//Draws the center point on the image
 	cv::line(m_image, m_center, m_center, cv::Scalar(0, 0, 255), 4, 8);
 	cv::line(m_imageClone, m_center, m_center, cv::Scalar(0, 0, 255), 4, 8);
-	//cv::imshow("Result", m_image);
+	cv::imshow("Result", m_image);
 
 	//Wait for random key press
-	//cv::waitKey(0);
+	cv::waitKey(0);
 
 	return 0;
 }
@@ -191,11 +191,34 @@ int ImageProcessing::verifyThrow(int x, int y) {
 	cv::line(m_image, point, point, cv::Scalar(0, 0, 255), 4, 8);
 	this->findTemplate();
 	this->findCenter();
+	cv::line(m_image, point, m_center, cv::Scalar(0, 200, 255), 4, 8);
 
 	cv::imshow("Result", m_image);
 
 	//Wait for random key press
 	cv::waitKey(0);
+	/*cv::VideoCapture cap(1);
+	if (!cap.isOpened()) {
+		std::cout << "Cap is not open";
+	}
+	cap.set(cv::CAP_PROP_EXPOSURE, 0.00000001);
+	cap.set(cv::CAP_PROP_GAIN, 0.000000001);
+	cap.set(cv::CAP_PROP_FRAME_WIDTH, 1448);
+	cap.set(cv::CAP_PROP_FRAME_HEIGHT, 1080);
 
+	namedWindow("Camera", cv::WINDOW_AUTOSIZE);
+
+	for (;;) {
+		cap >> m_image;
+		this->undistort();
+		this->PanoramicDistortion();
+		this->findTemplate();
+		this->findCenter();
+		this->makePlacement(point.x, point.y);
+		imshow("Camera", m_image);
+		if (cv::waitKey(30) >= 0)
+			break;
+	}
+	*/
 	return 0;
 }

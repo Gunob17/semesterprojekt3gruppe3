@@ -3,6 +3,8 @@
 
 #include "login.h"
 #include "imageprocessing.h"
+
+#include <cmath>
 #include <QtSql>
 #include <QtSql/QSql>
 #include <QtSql/QSqlDatabase>
@@ -33,7 +35,7 @@ void MainWindow::on_loadButton_clicked() {
 
     QSqlQueryModel * model = new  QSqlQueryModel();
 
-    //Pointer, da man vil kun referere til en allerede oprettet connection, ikke oprette en ny!
+    //Pointer, da man kun vil referere til en allerede oprettet connection, ikke oprette en ny!
     QSqlQuery* query = new QSqlQuery(conn.db);
 
     query->prepare("SELECT * FROM test123.koordinator;");
@@ -58,36 +60,14 @@ void MainWindow::on_startButton_clicked() {
 	QString x = QString::number(center.x - 300);
 	QString y = QString::number(center.y - 900);
 	QString toSQL = "insert into koordinator values (NULL," + x + ", " + y + ",NULL,NULL,NULL,NULL)";
+	
 	QSqlQuery* query = new QSqlQuery(conn.db);
 	query->prepare(toSQL);
 	query->exec();
 	on_loadButton_clicked();
 	QMessageBox::information(this, "Message", "The image was processed successfully!");
 }
-/*void MainWindow::on_pushButton_find_clicked() {
-	//if (ui->Xinput->text().isEmpty() || ui->Yinput->text().isEmpty()) {}
-	
-		int x_spin;
-		int y_spin;
 
-		x_spin = ui->Xinput->value();
-		y_spin = ui->Yinput->value();
-	img = ImageProcessing("C:/Users/gusta/Desktop/images/robcalc01.jpg");
-	//img.undistort();
-	img.PanoramicDistortion();
-	img.makePlacement(x_spin,y_spin);
-
-	cv::destroyAllWindows();
-	cv::Point2i center = img.getCenter();
-	QString x = QString::number(center.x - 300);
-	QString y = QString::number(center.y - 900);
-	//QString toSQL = "insert into koordinator values (NULL," + x + ", " + y + ",NULL,NULL)";
-	//QSqlQuery* query = new QSqlQuery(conn.db);
-	//query->prepare(toSQL);
-	//query->exec();
-
-	on_loadButton_clicked();
-}*/
 void MainWindow::on_Xinput_valueChanged() {
 	int x_spin;
 	int y_spin;
@@ -154,15 +134,19 @@ void MainWindow::on_verifyButton_clicked() {
 	img.verifyThrow(point.x, point.y);
 	QMessageBox::information(this, "Message", "The throw has been completed with these results");
 	cv::destroyAllWindows();
+	
 	cv::Point2i center = img.getCenter();
 	QString x = QString::number(center.x - 300);
 	QString y = QString::number(center.y - 900);
+	int lenth = std::sqrt(std::pow(point.x - (center.x - 300), 2) + std::pow(point.y - (center.y - 900), 2));
+	ui->label_2->setText("there is " + QString::number(lenth) + " mm between target and object");
 	QSqlQueryModel * model = new  QSqlQueryModel();
 	QSqlQuery* query = new QSqlQuery(conn.db);
 
 	query->prepare("SELECT * FROM test123.koordinator;");
 
 	query->exec();
+
 	model->setQuery(*query);
 
 	int place = model->rowCount();
@@ -176,13 +160,3 @@ void MainWindow::on_verifyButton_clicked() {
 	
 }
 
-/*void MainWindow::on_Yinput_valueChanged(int arg1) {
-	int x_spin;
-	int y_spin;
-
-	x_spin = ui->Xinput->value();
-	y_spin = ui->Yinput->value();
-	ui->Xinput->setRange( (y_spin - 1760.499) / -1.030369,(y_spin - 670.3576) / -1.030905);
-	//Qlabel* label
-	ui->label2->setText("x axis has to be between: " + QString::number((y_spin - 1760.499) / -1.030369) + " and: " + QString::number((y_spin - 670.3576) / -1.030905));
-}*/
