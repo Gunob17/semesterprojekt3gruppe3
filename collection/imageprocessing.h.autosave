@@ -1,0 +1,33 @@
+#ifndef IMAGEPROCESSING_H
+#define IMAGEPROCESSING_H
+
+#include <iostream>
+#include <string>
+
+#include <opencv2/opencv.hpp>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/highgui.hpp>
+
+class ImageProcessing
+{
+public:
+	ImageProcessing();
+	ImageProcessing(int);
+	ImageProcessing(std::string);
+	cv::Mat getimage();
+    void undistort();
+    void perspectiveTransformation();
+	int findTemplate();
+	int findCenter();
+    cv::Point2i getCenter();
+    int setDestination(int x, int y);
+    int verifyThrow(int x, int y);
+
+private:
+	cv::Mat m_image;
+	cv::Point m_tlCorner;
+	cv::Point m_brCorner;
+	cv::Point m_center;
+};
+
+#endif // IMAGEPROCESSING_H

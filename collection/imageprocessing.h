@@ -19,16 +19,13 @@ public:
 	int findTemplate();
 	int findCenter();
     int setDestination(int x, int y);
+    int verifyThrow(int x, int y);
 	void undistort();
-	void saveImage(std::string);
-    void panoramicDistortion();
+    void panoramicTransformation();
 	cv::Point2i getCenter();
-	int verifyThrow(int x, int y);
-	void resi(int cols, int rows);
 
 private:
 	cv::Mat m_image;
-	cv::Mat m_imageClone;
 	cv::Point m_tlCorner;
 	cv::Point m_brCorner;
 	cv::Point m_center;

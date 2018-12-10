@@ -39,10 +39,12 @@ void MainWindow::on_loadButton_clicked() {
 }
 
 void MainWindow::on_startButton_clicked() {
-    img = ImageProcessing(0);
+//    img = ImageProcessing("C:/Users/sarah/OneDrive - Syddansk Universitet/UNI/Tredje Semester/Semesterprojekt (tredje semester)/Images/rispude05.jpg");
+
+    img = ImageProcessing(1);
 
 	img.undistort();
-    img.panoramicDistortion();
+    img.perspectiveTransformation();
 	img.findTemplate();
 	img.findCenter();
 	
@@ -69,11 +71,11 @@ void MainWindow::on_Xinput_valueChanged() {
 	y_spin = ui->Yinput->value();
 
 	if (y_spin <= 12.4321*x_spin + (-4497.037)) {
-		ui->label5->setText("Y-axis has to be between: " + QString::number(0.9815498*(x_spin)+(-1130.576)) + " and: " + QString::number(-1.030369*x_spin + 551.3884));
+        ui->label5->setText("Y-axis has to be between: " + QString::number((int)0.9815498*(x_spin)+(-1130.576)) + " and: " + QString::number((int)-1.030369*x_spin + 551.3884));
 		ui->Yinput->setRange(0.9815498*(x_spin)+(-1130.576), -1.030369*x_spin + 551.3884);
 	}
 	else if (y_spin > 12.4321*x_spin + (-4497.037)) {
-		ui->label5->setText("Y-axis has to be between: " + QString::number(-1.030905*x_spin + -538.9139) + " and: " + QString::number(0.9775281*x_spin + -201.573));
+        ui->label5->setText("Y-axis has to be between: " + QString::number((int)-1.030905*x_spin + -538.9139) + " and: " + QString::number((int)0.9775281*x_spin + -201.573));
 		ui->Yinput->setRange(-1.030905*x_spin + -538.9139, 0.9775281*x_spin + -201.573);
 	}
 }
@@ -81,7 +83,7 @@ void MainWindow::on_Xinput_valueChanged() {
 void MainWindow::on_throwButton_clicked() {
 	point = cv::Point(ui->Xinput->value(), ui->Yinput->value());
     img = ImageProcessing("../images/robcalc02.jpg");
-    img.panoramicDistortion();
+    img.perspectiveTransformation();
     img.setDestination(point.x, point.y);
 
 	QMessageBox::information(this, "Message", "The object will now be thrown to the chosen destination");	
@@ -105,9 +107,11 @@ void MainWindow::on_throwButton_clicked() {
 }
 
 void MainWindow::on_verifyButton_clicked() {
-    img = ImageProcessing(0);
+//    img = ImageProcessing("C:/Users/sarah/OneDrive - Syddansk Universitet/UNI/Tredje Semester/Semesterprojekt (tredje semester)/Images/rispude05.jpg");
+    img = ImageProcessing(1);
+
 	img.undistort();
-    img.panoramicDistortion();
+    img.perspectiveTransformation();
 	img.verifyThrow(point.x, point.y);
 
     QMessageBox::information(this, "Message", "The throw has been completed with these results");

@@ -97,9 +97,13 @@ public:
         Xinput->setGeometry(QRect(1016, 260, 151, 22));
         Xinput->setMinimum(-159);
         Xinput->setMaximum(836);
+        Xinput->setValue(334);
         Yinput = new QSpinBox(centralWidget);
         Yinput->setObjectName(QStringLiteral("Yinput"));
         Yinput->setGeometry(QRect(1206, 260, 151, 22));
+        Yinput->setMinimum(-538);
+        Yinput->setMaximum(-201);
+        Yinput->setValue(-342);
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(960, 20, 441, 20));
@@ -151,7 +155,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1430, 21));
+        menuBar->setGeometry(QRect(0, 0, 1430, 26));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -181,7 +185,7 @@ public:
         label6->setText(QApplication::translate("MainWindow", "Click the button below to throw the object to the chosen coordinates.", nullptr));
         verifyButton->setText(QApplication::translate("MainWindow", "Verify Throw", nullptr));
         label4->setText(QApplication::translate("MainWindow", "X-axis has to be between: -159  and: 836", nullptr));
-        label5->setText(QApplication::translate("MainWindow", "Y-axis has to be between: -538  and: -201 ", nullptr));
+        label5->setText(QApplication::translate("MainWindow", "Y-axis has to be between: -883  and: 124", nullptr));
         label_2->setText(QString());
     } // retranslateUi
 

@@ -17,24 +17,25 @@ ImageProcessing::ImageProcessing(int inputSource) {
 
 	cap.set(cv::CAP_PROP_EXPOSURE, 0.00000001);
 	cap.set(cv::CAP_PROP_GAIN, 0.000000001);
-	cap.set(cv::CAP_PROP_FRAME_WIDTH, 1448);
+    cap.set(cv::CAP_PROP_FRAME_WIDTH, 1440);
 	cap.set(cv::CAP_PROP_FRAME_HEIGHT, 1080);
 
 	namedWindow("Camera", cv::WINDOW_AUTOSIZE);
 
 	for (;;) {
 		cap >> m_image;
-		imshow("Camera", m_image);
-		if (cv::waitKey(30) >= 0)
+        cv::imshow("Camera", m_image);
+        if (cv::waitKey(30) >= 0)
 			break;
     }                                                                           // Get a new frame from camera
 }
 
 ImageProcessing::ImageProcessing(std::string loc) {
-    m_image = cv::imread(loc, cv::IMREAD_GRAYSCALE);                            // Read the file
+    m_image = cv::imread(loc, cv::IMREAD_COLOR);                                // Read the file
     if (!m_image.data) {                                                        // Check for invalid input
 		std::cout << "Could not open or find the image" << std::endl;
-	}
+    }
+    cv::imshow("Image", m_image);
 }
 
 void ImageProcessing::undistort() {
@@ -43,9 +44,7 @@ void ImageProcessing::undistort() {
 	cv::Mat mapX, mapY;
 	cv::Size frameSize(1448, 1080);
 	cv::initUndistortRectifyMap(K, k, cv::Matx33f::eye(), K, frameSize, CV_32FC1, mapX, mapY);
-	m_imageClone = m_image.clone();
 	cv::remap(m_image, m_image, mapX, mapY, 1, cv::BORDER_CONSTANT);
-	m_imageClone = m_image.clone();
     cv::cvtColor(m_image, m_image, CV_BGR2GRAY);                                //Convert the image to grayscale (necessary for template matching)
 }
 
@@ -54,43 +53,37 @@ cv::Mat ImageProcessing::getimage() {
 }
 
 int ImageProcessing::findTemplate() {
-	cv::Mat template_img;
-	cv::Mat result_mat;
+    cv::Mat template_img;
+    cv::Mat result_mat;
 
-//match method options: CV_TM_SQDIFF, CV_TM_SQDIFF_NORMED, CV_TM _CCORR, CV_TM_CCORR_NORMED, CV_TM_CCOEFF, CV_TM_CCOEFF_NORMED
-	int match_method = CV_TM_CCORR_NORMED;
-
-	template_img = cv::imread("./images/rispude01 - template.jpg", cv::IMREAD_GRAYSCALE);
-	if (!template_img.data) {
+    template_img = cv::imread("../images/rispude01 - template.jpg", cv::IMREAD_GRAYSCALE);
+    if (!template_img.data) {
         std::cout << "Could not open template" << std::endl;
-		return -1;
-	}
+        return -1;
+    }
 
-	while (true) {
+    int match_method = CV_TM_CCORR_NORMED;
+
+    while (true) {
         //Matches the template to the image using the given match method, and stores the result in result_mat
-		cv::matchTemplate(m_image, template_img, result_mat, match_method);
-		cv::normalize(result_mat, result_mat, 0, 1, cv::NORM_MINMAX, -1, cv::Mat());
+        cv::matchTemplate(m_image, template_img, result_mat, match_method);
+        cv::normalize(result_mat, result_mat, 0, 1, cv::NORM_MINMAX, -1, cv::Mat());
 
-		double minVal, maxVal;
-		cv::Point minLoc, maxLoc, matchLoc;
+        double minVal, maxVal;
+        cv::Point minLoc, maxLoc;
         //Finds the minimum and maximum values of the array (the corners in the part of the image, that matches the template)
-		cv::minMaxLoc(result_mat, &minVal, &maxVal, &minLoc, &maxLoc, cv::Mat());
-		if (match_method == CV_TM_SQDIFF || match_method == CV_TM_SQDIFF_NORMED)
-			matchLoc = minLoc;
-		else
-			matchLoc = maxLoc;
+        cv::minMaxLoc(result_mat, &minVal, &maxVal, &minLoc, &maxLoc, cv::Mat());
 
         //Defines the bottom right corner
-		cv::Point point = cv::Point(matchLoc.x + template_img.cols, matchLoc.y + template_img.rows);
+        cv::Point point = cv::Point(maxLoc.x + template_img.cols, maxLoc.y + template_img.rows);
 
-		//A rectangle is drawn around the area where the template has a match
-		cv::rectangle(m_image, matchLoc, point, CV_RGB(255, 0, 0), 3);
-		cv::rectangle(m_imageClone, matchLoc, point, CV_RGB(255, 0, 0), 3);
+        //A rectangle is drawn around the area where the template has a match
+        cv::rectangle(m_image, maxLoc, point, CV_RGB(255, 0, 0), 3);
 
-		//Wait
-		int k = cv::waitKey(0);
+        //Wait
+        int k = cv::waitKey(0);
         if (k == 27 || k == 13) {               //Exits loop when ESC/Enter is pressed (27 = decimal value for ESC, 13 for Enter)
-            m_tlCorner = matchLoc;              //Corner values are saved in member variables for later use
+            m_tlCorner = maxLoc;                //Corner values are saved in member variables for later use
             m_brCorner = point;
             std::cout << "Top left corner of template: " << m_tlCorner << std::endl;
             std::cout << "Bottom right corner of template: " << m_brCorner << std::endl;
@@ -111,7 +104,6 @@ int ImageProcessing::findCenter() {
 
 	//Draws the center point on the image
 	cv::line(m_image, m_center, m_center, cv::Scalar(0, 0, 255), 4, 8);
-	cv::line(m_imageClone, m_center, m_center, cv::Scalar(0, 0, 255), 4, 8);
 	cv::imshow("Result", m_image);
 
 	//Wait for random key press
@@ -134,12 +126,12 @@ int ImageProcessing::setDestination(int x, int y) {
 	return 0;
 }
 
-void ImageProcessing::panoramicDistortion() {
+void ImageProcessing::panoramicTransformation() {
 	cv::Point2f inputpoint[4];
-	cv::Mat lambda(2, 4, CV_32FC1);
+    cv::Mat ptMatrix(2, 4, CV_32FC1);
 	cv::Point2f output[4];
 
-    lambda = cv::Mat::zeros(m_image.rows, m_image.cols, m_image.type());
+    ptMatrix = cv::Mat::zeros(m_image.rows, m_image.cols, m_image.type());
 
 	inputpoint[0] = cv::Point2f(96, 882);
 	inputpoint[1] = cv::Point2f(945, 890);
@@ -151,16 +143,12 @@ void ImageProcessing::panoramicDistortion() {
 	output[2] = cv::Point2f((375 + 300), (165 + 900));
 	output[3] = cv::Point2f((-159 + 300), (-375 + 900));
 
-	lambda = cv::getPerspectiveTransform(inputpoint, output);
-	cv::warpPerspective(m_image, m_image, lambda, m_image.size());
+    ptMatrix = cv::getPerspectiveTransform(inputpoint, output);
+    cv::warpPerspective(m_image, m_image, ptMatrix, m_image.size());
 }
 
 cv::Point2i ImageProcessing::getCenter() {
 	return m_center;
-}
-
-void ImageProcessing::resi(int cols, int rows) {
-	cv::resize(m_image, m_image, cv::Size(cols, rows));
 }
 
 int ImageProcessing::verifyThrow(int x, int y) {
