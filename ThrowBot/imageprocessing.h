@@ -1,3 +1,4 @@
+/// by Sarah Trohl and Gustav Nobel
 #ifndef IMAGEPROCESSING_H
 #define IMAGEPROCESSING_H
 
@@ -11,33 +12,24 @@
 class ImageProcessing
 {
 public:
-    ImageProcessing();
-    ImageProcessing(int);
-    ImageProcessing(std::string);
+	ImageProcessing();
+	ImageProcessing(int);
+	ImageProcessing(std::string);
 
-    cv::Mat getimage();
-    int findTemplate();
-    int findCenter();
-    void undistort();
-    void saveImage(std::string);
-    void PanoramicDistortion();
+	cv::Mat getimage();
+	int findTemplate();
+	int findCenter();
+	int setDestination(int x, int y);
+	int verifyThrow(int x, int y);
+	void undistort();
+	void perspectiveTransformation();
+	cv::Point2i getCenter();
 
 private:
-    cv::Mat m_image;
-    cv::Mat m_imageClone;
-    cv::Point m_tlCorner;
-    cv::Point m_brCorner;
-    cv::Point m_center;
+	cv::Mat m_image;
+	cv::Point m_tlCorner;
+	cv::Point m_brCorner;
+	cv::Point m_center;
 };
-
-/*
-void converttogrey();
-void resi(int cols, int rows);
-void dilateErode();
-
-void converttobinary();
-std::string conBinToString();
-void PanoramicDistortion();
-*/
 
 #endif // IMAGEPROCESSING_H

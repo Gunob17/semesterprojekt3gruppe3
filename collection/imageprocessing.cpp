@@ -126,7 +126,7 @@ int ImageProcessing::setDestination(int x, int y) {
 	return 0;
 }
 
-void ImageProcessing::panoramicTransformation() {
+void ImageProcessing::perspectiveTransformation() {
 	cv::Point2f inputpoint[4];
     cv::Mat ptMatrix(2, 4, CV_32FC1);
 	cv::Point2f output[4];

@@ -1,0 +1,18 @@
+﻿  Generate moc_predefs.h
+  Moc'ing mainwindow.h...
+  imageprocessing.cpp
+  login.cpp
+  main.cpp
+  mainwindow.cpp
+  moc_mainwindow.cpp
+c:\users\gusta\onedrive - syddansk universitet\3,semester\cv\throwbot\imageprocessing.cpp(42): warning C4305: 'argument': truncation from 'double' to '_Tp'
+          with
+          [
+              _Tp=float
+          ]
+c:\users\gusta\onedrive - syddansk universitet\3,semester\cv\throwbot\imageprocessing.cpp(43): warning C4305: 'argument': truncation from 'double' to '_Tp'
+          with
+          [
+              _Tp=cv::DataType<cv::RotatedRect>::channel_type
+          ]
+  Throwbot.vcxproj -> C:\Users\gusta\OneDrive - Syddansk Universitet\3,semester\cv\Throwbot\release\Throwbot.exe

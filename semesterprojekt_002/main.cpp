@@ -137,7 +137,7 @@ static void onMouse(int event,int x,int y,int,void*)
 
     imshow("edges",p);
     cout<< "                                   "<<"\r";
-    cout<< x<<","<<y<<"\r";
+    cout<< x-300<<","<<y-900<<"\r";
 
 
 }
@@ -147,18 +147,18 @@ int main()
 {
 
 
-    useAndFindObj c("C:/Users/gusta/Desktop/images/rispude01.jpg");
+    useAndFindObj c(1);
     //Mat pic;
 
     //p = c.getimage();
-    //c.undistortimage();
+    c.undistortimage();
     namedWindow("edges",WINDOW_AUTOSIZE);
     c.PanoramicDistortion();
-    c.findTemplate();
-    c.findCenter();
+    //c.findTemplate();
+    //c.findCenter();
     p = c.getimage();
     setMouseCallback("edges",onMouse);
-    //c.saveImage("C:/Users/gusta/Desktop/images/robcalc03.jpg");
+    //c.saveImage("C:/Users/gusta/Desktop/images/rispude05_-gain_and_exp.jpg");
     //imshow("edges",c.getimage());
      waitKey(0);
     /*c.resi(144*8,108*8);

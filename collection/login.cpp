@@ -12,7 +12,7 @@ void Login::makeConnection(){
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
 
-    db.setHostName("192.168.137.1");
+    db.setHostName("127.0.0.1");
     db.setPort(3306);
     db.setDatabaseName("test123");
     db.setUserName("root");

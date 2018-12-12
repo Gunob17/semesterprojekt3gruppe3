@@ -21,7 +21,7 @@ public:
     int setDestination(int x, int y);
     int verifyThrow(int x, int y);
 	void undistort();
-    void panoramicTransformation();
+    void perspectiveTransformation();
 	cv::Point2i getCenter();
 
 private:

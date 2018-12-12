@@ -1,0 +1,13 @@
+﻿  imageprocessing.cpp
+  login.cpp
+c:\users\gusta\onedrive - syddansk universitet\3,semester\cv\throwbot\imageprocessing.cpp(45): warning C4305: 'argument': truncation from 'double' to '_Tp'
+          with
+          [
+              _Tp=float
+          ]
+c:\users\gusta\onedrive - syddansk universitet\3,semester\cv\throwbot\imageprocessing.cpp(46): warning C4305: 'argument': truncation from 'double' to '_Tp'
+          with
+          [
+              _Tp=cv::DataType<cv::RotatedRect>::channel_type
+          ]
+  Throwbot.vcxproj -> C:\Users\gusta\OneDrive - Syddansk Universitet\3,semester\cv\Throwbot\debug\Throwbot.exe

@@ -26,8 +26,8 @@ useAndFindObj::useAndFindObj(int type)
     if(!cap.isOpened()){
         //return -1;
     }
-    cap.set(CAP_PROP_EXPOSURE, 0.00000001);
-    cap.set(CAP_PROP_GAIN, 0.000000001);
+    //cap.set(CAP_PROP_EXPOSURE, 0.00000001);
+    //cap.set(CAP_PROP_GAIN, 0.000000001);
     cap.set(CAP_PROP_FRAME_WIDTH,1448);
     cap.set(CAP_PROP_FRAME_HEIGHT,1080);
 
@@ -122,6 +122,7 @@ void useAndFindObj::undistortimage(){
     initUndistortRectifyMap(K, k, Matx33f::eye(), K, frameSize, CV_32FC1, mapX, mapY);
     //cv::Mat imgUndistorted;
     remap(pic,pic,mapX,mapY,1,BORDER_CONSTANT);
+    cv::cvtColor(pic, pic, CV_BGR2GRAY);
 }
 int useAndFindObj::findTemplate() {
     cv::Mat template_img;
